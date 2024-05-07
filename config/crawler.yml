@@ -1,0 +1,32 @@
+crawler:
+  start-url: https://hsdev.choicelean.com
+  valid-patten: https://hsdev.choicelean.com
+  black-list: 
+    - https://hsdev.choicelean.com/webtools/control/ServiceList
+    - https://hsdev.choicelean.com/webtools/control/EntityPerformanceTest
+    - https://hsdev.choicelean.com/webtools/control/entitymaint
+    - https://hsdev.choicelean.com/webtools/control/DeleteGeneric
+  login:
+    username: reymond
+    password: Yuenv1984
+  prune:
+    tags:
+      - head
+      - script
+      - style
+      - header
+      - aside
+    attrs:
+      - style
+      - align
+      - border
+      - cellpadding
+      - cellspacing
+      - href
+      - onclick
+      - action
+      - method
+      - bgcolor
+    keep-one:
+      - select
+      - tbody

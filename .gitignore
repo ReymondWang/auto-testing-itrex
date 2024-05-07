@@ -1,0 +1,11 @@
+file_*.txt
+__pycache__
+.DS_Store
+runs
+output
+nc_workspace
+.ipynb_checkpoints
+node_modules
+.svelte-kit/
+*.wav
+runtime_outs
