@@ -30,3 +30,8 @@ crawler:
     keep-one:
       - select
       - tbody
+agent:
+  url: http://localhost:7860
+  input-ele: //*[@id="component-10"]/label/textarea
+  send-ele: //*[@id="btn-send-style"]
+  response-ele: //*[@id="chatbot"]/div[2]/div[2]/div/div[2]/span/p

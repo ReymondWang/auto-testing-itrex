@@ -25,8 +25,17 @@ class HsCrawler(object):
     self.driver = webdriver.Chrome()
     self.driver.maximize_window()
     self.wait = WebDriverWait(self.driver, 10)
+
+    # 保存爬虫的窗口句柄
+    self.crawler_window = self.driver.window_handles[-1]
+
+    # 打开一个新的窗口，并用它来执行agent
+    self.driver.execute_script("window.open('');")
+    self.agent_window = self.driver.window_handles[-1]
     
   def get_html(self) -> None:
+    self.driver.switch_to.window(self.crawler_window)
+
     black_list = self.config["crawler"]["black-list"]
     try:
       while len(self.need_visit) > 0:
@@ -51,7 +60,10 @@ class HsCrawler(object):
         if self.is_page_error():
           self.error_url.append(cur_href)
           continue
+        else:
+          self.get_code(pruned_html)
 
+        self.driver.switch_to.window(self.crawler_window)
         self.collect_href()
         
         # print(self.driver.title)
@@ -140,6 +152,16 @@ class HsCrawler(object):
     except NoSuchElementException:
       return False
 
+  def get_code(self, html):
+    self.driver.switch_to.window(self.agent_window)
+
+    agent_url = self.config["agent"]["url"]
+    input_ele = self.config["agent"]["input-ele"]
+    send_ele = self.config["agent"]["send-ele"]
+    response_ele = self.config["agent"]["response-ele"]
+
+    self.driver.get(agent_url)
+
   def close(self) -> None:
     self.driver.quit()
 
@@ -150,6 +172,7 @@ if __name__ == "__main__":
   path = os.path.join(cur_path, "../config/crawler.yml")
   config = get_crawler_config(path)
   crawler = HsCrawler(config=config)
+  print("----started----")
   crawler.get_html()
   crawler.save_visited_url()
   crawler.close()
