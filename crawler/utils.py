@@ -129,13 +129,13 @@ def save_dom_file(dom_source: str, file_name: str, path: str="../dom") -> None:
         file.write(dom_source)
 
 
-def login_by_user(driver: WebDriver, user_login_id: str, password: str):
-    if "HyperStore | 登录" != driver.title:
+def login_by_user(driver: WebDriver, user_login_id: str, password: str, title: str=None):
+    if title and title != driver.title:
         raise Exception("URL:" + driver.current_url + "不是登录页面")
     
-    ele_username = driver.find_element(By.NAME, "USERNAME")
-    ele_password = driver.find_element(By.NAME, "PASSWORD")
-    btn_login = driver.find_element(By.XPATH, '//*[@id="loginForm"]/div[3]/div[2]/button')
+    ele_username = driver.find_element(By.XPATH, "/html/body/div/div/form/div[1]/input")
+    ele_password = driver.find_element(By.XPATH, "/html/body/div/div/form/div[2]/input")
+    btn_login = driver.find_element(By.XPATH, '/html/body/div/div/form/button')
 
     ele_username.send_keys(user_login_id)
     ele_password.send_keys(password)

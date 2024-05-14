@@ -26,15 +26,17 @@ class HsCrawler(object):
     self.driver.maximize_window()
     self.wait = WebDriverWait(self.driver, 10)
 
-    # 保存爬虫的窗口句柄
-    self.crawler_window = self.driver.window_handles[-1]
+    if self.config["gen-code"] == "Y":
+      # 保存爬虫的窗口句柄
+      self.crawler_window = self.driver.window_handles[-1]
 
-    # 打开一个新的窗口，并用它来执行agent
-    self.driver.execute_script("window.open('');")
-    self.agent_window = self.driver.window_handles[-1]
+      # 打开一个新的窗口，并用它来执行agent
+      self.driver.execute_script("window.open('');")
+      self.agent_window = self.driver.window_handles[-1]
     
   def get_html(self) -> None:
-    self.driver.switch_to.window(self.crawler_window)
+    if self.config["gen-code"] == "Y":
+      self.driver.switch_to.window(self.crawler_window)
 
     black_list = self.config["crawler"]["black-list"]
     try:
@@ -61,17 +63,20 @@ class HsCrawler(object):
           self.error_url.append(cur_href)
           continue
         else:
-          self.get_code(pruned_html)
+          if self.config["gen-code"] == "Y":
+            self.get_code(pruned_html)
 
-        self.driver.switch_to.window(self.crawler_window)
+        if self.config["gen-code"] == "Y":
+          self.driver.switch_to.window(self.crawler_window)
+          
         self.collect_href()
         
-        # print(self.driver.title)
-        if "HyperStore | 登录" == self.driver.title:
+        login_title = self.config["crawler"]["login"]["title"]
+        if login_title == self.driver.title:
           username = self.config["crawler"]["login"]["username"]
           password = self.config["crawler"]["login"]["password"]
 
-          login_by_user(self.driver, username, password)
+          login_by_user(self.driver, username, password, login_title)
           self.wait.until_not(EC.visibility_of_element_located((By.CLASS_NAME, "fa fa-refresh fa-spin")))
           self.collect_href()
     except Exception:

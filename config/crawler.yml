@@ -1,21 +1,23 @@
 crawler:
-  start-url: https://hsdev.choicelean.com
-  valid-patten: https://hsdev.choicelean.com
+  start-url: http://183.192.158.118:18100
+  valid-patten: http://183.192.158.118:18100
   black-list: 
     - https://hsdev.choicelean.com/webtools/control/ServiceList
     - https://hsdev.choicelean.com/webtools/control/EntityPerformanceTest
     - https://hsdev.choicelean.com/webtools/control/entitymaint
     - https://hsdev.choicelean.com/webtools/control/DeleteGeneric
   login:
-    username: reymond
-    password: Yuenv1984
+    title: 基础开发平台
+    username: admin
+    password: 123456
   prune:
     tags:
       - head
       - script
       - style
-      - header
-      - aside
+      - nav
+      - footer
+      - small
     attrs:
       - style
       - align
@@ -30,6 +32,7 @@ crawler:
     keep-one:
       - select
       - tbody
+gen-code: N
 agent:
   url: http://localhost:7860
   input-ele: //*[@id="component-10"]/label/textarea
