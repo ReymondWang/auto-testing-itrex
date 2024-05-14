@@ -2,10 +2,9 @@ crawler:
   start-url: http://183.192.158.118:18100
   valid-patten: http://183.192.158.118:18100
   black-list: 
-    - https://hsdev.choicelean.com/webtools/control/ServiceList
-    - https://hsdev.choicelean.com/webtools/control/EntityPerformanceTest
-    - https://hsdev.choicelean.com/webtools/control/entitymaint
-    - https://hsdev.choicelean.com/webtools/control/DeleteGeneric
+    - http://183.192.158.118:18100/#
+    - http://183.192.158.118:18100/index#
+    - http://183.192.158.118:18100/login?logout#
   login:
     title: 基础开发平台
     username: admin
@@ -18,6 +17,7 @@ crawler:
       - nav
       - footer
       - small
+      - ul
     attrs:
       - style
       - align
@@ -32,6 +32,16 @@ crawler:
     keep-one:
       - select
       - tbody
+    class:
+      - hr-line-dashed
+      - pace pace-active
+      - footer
+      - ibox-title
+      - row border-bottom white-bg dashboard-header
+      - col-sm-2 control-label
+      - row border-bottom
+      - jstree jstree-3 jstree-default
+      - page
 gen-code: N
 agent:
   url: http://localhost:7860

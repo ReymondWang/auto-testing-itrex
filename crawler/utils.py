@@ -67,7 +67,7 @@ def find_all_a_elements(driver: WebDriver, element: WebElement=None) -> list[Web
     return a_elements, a_href
 
 
-def prun_html(page_source, attrs_to_remove=None, tags_to_remove=None, keep_one_child=None) -> str:
+def prun_html(page_source, attrs_to_remove=None, tags_to_remove=None, keep_one_child=None, class_remove=None) -> str:
     """
     对HTML源代码进行剪枝和简化操作。
 
@@ -88,13 +88,23 @@ def prun_html(page_source, attrs_to_remove=None, tags_to_remove=None, keep_one_c
         tags_to_remove = []
     if keep_one_child is None:
         keep_one_child = []
+    if class_remove is None:
+        class_remove = []
 
     to_decompose = []
     for tag in soup.find_all():
+        class_name = ""
+        class_arr = tag.get("class")
+        if class_arr:
+            for cls in class_arr:
+                if class_name:
+                    class_name += " "
+                class_name += cls
+
         for attr in attrs_to_remove:
             if attr in tag.attrs:
                 del tag[attr]
-        if tag.name in tags_to_remove:
+        if tag.name in tags_to_remove or class_name in class_remove:
             to_decompose.append(tag)
         if tag.name in keep_one_child:
             children = list(tag.children)
@@ -140,3 +150,9 @@ def login_by_user(driver: WebDriver, user_login_id: str, password: str, title: s
     ele_username.send_keys(user_login_id)
     ele_password.send_keys(password)
     btn_login.click()
+
+
+def is_valid_file_name_part(s):
+    return not bool(re.search(r'\d', s)) \
+        and "null" != s \
+        and "system" != s

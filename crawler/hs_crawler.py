@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
-from utils import find_all_a_elements, login_by_user, prun_html, save_dom_file, get_crawler_config
+from utils import find_all_a_elements, login_by_user, prun_html, save_dom_file, get_crawler_config, is_valid_file_name_part
 
 import datetime
 import furl
@@ -54,7 +54,8 @@ class HsCrawler(object):
         attrs_remove = self.config["crawler"]["prune"]["attrs"]
         tags_remove = self.config["crawler"]["prune"]["tags"]
         keep_one_child = self.config["crawler"]["prune"]["keep-one"]
-        pruned_html = prun_html(raw_html, attrs_to_remove=attrs_remove, tags_to_remove=tags_remove, keep_one_child=keep_one_child)
+        class_remove = self.config["crawler"]["prune"]["class"]
+        pruned_html = prun_html(raw_html, attrs_to_remove=attrs_remove, tags_to_remove=tags_remove, keep_one_child=keep_one_child, class_remove=class_remove)
         saved_file_name = self.get_dom_file_name(cur_href)
         print("----" + saved_file_name + "----")
         save_dom_file(dom_source=pruned_html, file_name=saved_file_name)
@@ -108,12 +109,23 @@ class HsCrawler(object):
 
     if len(f.path.segments) == 0:
       return "login.html"
-    
-    last_path_segment = f.path.segments[-1]
-    file_name = re.sub(r'(?<!^)(?=[A-Z])', '_', last_path_segment).lower()
-    if not file_name.endswith(".html"):
-      file_name = file_name + ".html"
-    return file_name
+    elif "#" in url:
+      last_path_segment = url.split("#")[1]
+      lps_arr = last_path_segment.split("/")
+      file_name = ""
+      for lps in lps_arr:
+        if lps and is_valid_file_name_part(lps):
+          if file_name:
+            file_name += "_"
+          file_name += lps 
+      file_name += ".html"
+      return file_name
+    else:
+      last_path_segment = f.path.segments[-1]
+      file_name = re.sub(r'(?<!^)(?=[A-Z])', '_', last_path_segment).lower()
+      if not file_name.endswith(".html"):
+        file_name = file_name + ".html"
+      return file_name
   
   def save_visited_url(self) -> None:
     current_datetime = datetime.datetime.now()
