@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
-from utils import find_all_a_elements, login_by_user, prun_html, save_dom_file, get_crawler_config, is_valid_file_name_part
+from utils import find_all_a_elements, login_by_user, prun_html, save_dom_file, save_python_file, get_crawler_config, is_valid_file_name_part
 
 import datetime
 import furl
@@ -24,7 +24,7 @@ class HsCrawler(object):
 
     self.driver = webdriver.Chrome()
     self.driver.maximize_window()
-    self.wait = WebDriverWait(self.driver, 10)
+    self.wait = WebDriverWait(self.driver, 100)
 
     if self.config["gen-code"] == "Y":
       # 保存爬虫的窗口句柄
@@ -33,6 +33,10 @@ class HsCrawler(object):
       # 打开一个新的窗口，并用它来执行agent
       self.driver.execute_script("window.open('');")
       self.agent_window = self.driver.window_handles[-1]
+
+      self.driver.switch_to.window(self.agent_window)
+      agent_url = self.config["agent"]["url"]
+      self.driver.get(agent_url)
     
   def get_html(self) -> None:
     if self.config["gen-code"] == "Y":
@@ -65,7 +69,8 @@ class HsCrawler(object):
           continue
         else:
           if self.config["gen-code"] == "Y":
-            self.get_code(pruned_html)
+            py_file_name = saved_file_name.replace("html", "py")
+            self.get_code(pruned_html, file_name=py_file_name)
 
         if self.config["gen-code"] == "Y":
           self.driver.switch_to.window(self.crawler_window)
@@ -169,15 +174,39 @@ class HsCrawler(object):
     except NoSuchElementException:
       return False
 
-  def get_code(self, html):
+  def get_code(self, html, file_name):
     self.driver.switch_to.window(self.agent_window)
 
-    agent_url = self.config["agent"]["url"]
-    input_ele = self.config["agent"]["input-ele"]
-    send_ele = self.config["agent"]["send-ele"]
-    response_ele = self.config["agent"]["response-ele"]
+    input_ele_loc = self.config["agent"]["input-ele"]
+    response_ele_loc = self.config["agent"]["response-ele"]
+    send_ele_loc = self.config["agent"]["send-ele"]
+    refresh_ele_loc = self.config["agent"]["refresh-ele"]
+    del_ele_loc = self.config["agent"]["del-ele"]
 
-    self.driver.get(agent_url)
+    del_ele = self.driver.find_element(By.XPATH, del_ele_loc)
+    if not del_ele.get_attribute("disabled"):
+      del_ele.click()
+    
+    input_ele = self.driver.find_element(By.XPATH, input_ele_loc)
+    code_gen_msg = self.code_prompt(html)
+    input_ele.send_keys(code_gen_msg)
+
+    print(code_gen_msg)
+
+    send_ele = self.driver.find_element(By.XPATH, send_ele_loc)
+    refresh_ele = self.driver.find_element(By.XPATH, refresh_ele_loc)
+    send_ele.click()
+    self.wait.until(EC.element_to_be_clickable(refresh_ele))
+
+    response_ele = self.driver.find_element(By.XPATH, response_ele_loc)
+    save_python_file(response_ele.text, file_name=file_name)
+
+
+  def code_prompt(self, msg):
+    # prompt = "Please generate a PO object for automated testing based on the following HTML, and return only Python code in Python code format. "
+    prompt = "请根据以下html生成自动化测试的PO对象，并且以Python代码的格式返回。在返回内容中不要添加文字解释，只返回代码即可。 "
+    return prompt + msg
+
 
   def close(self) -> None:
     self.driver.quit()

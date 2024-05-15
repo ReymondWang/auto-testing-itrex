@@ -42,9 +42,11 @@ crawler:
       - row border-bottom
       - jstree jstree-3 jstree-default
       - page
-gen-code: N
+gen-code: Y
 agent:
   url: http://localhost:7860
   input-ele: //*[@id="component-10"]/label/textarea
-  send-ele: //*[@id="btn-send-style"]
   response-ele: //*[@id="chatbot"]/div[2]/div[2]/div/div[2]/span/p
+  send-ele: //*[@id="btn-send-style"]
+  refresh-ele: /html/body/gradio-app/div/div/div[1]/div/div/div[7]/button[4]
+  del-ele: /html/body/gradio-app/div/div/div[1]/div/div/div[7]/button[5]

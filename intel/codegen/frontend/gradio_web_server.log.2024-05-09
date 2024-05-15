@@ -1,0 +1,105 @@
+2024-05-09 22:36:17 | INFO | gradio_web_server | Models: ['Intel/neural-chat-7b-v3-1']
+2024-05-09 22:36:18 | ERROR | stderr | /Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py:593: GradioDeprecationWarning: The `style` method is deprecated. Please set these arguments in the constructor instead.
+2024-05-09 22:36:18 | ERROR | stderr |   model_selector = gr.Dropdown(
+2024-05-09 22:36:18 | ERROR | stderr | /Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py:600: GradioDeprecationWarning: The `style` method is deprecated. Please set these arguments in the constructor instead.
+2024-05-09 22:36:18 | ERROR | stderr |   chatbot = gr.Chatbot(elem_id="chatbot", visible=False).style(height=550)
+2024-05-09 22:36:18 | ERROR | stderr | /Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py:603: GradioDeprecationWarning: The `style` method is deprecated. Please set these arguments in the constructor instead.
+2024-05-09 22:36:18 | ERROR | stderr |   textbox = gr.Textbox(
+2024-05-09 22:36:19 | INFO | stdout | Running on local URL:  http://0.0.0.0:7860
+2024-05-09 22:36:19 | INFO | stdout | 
+2024-05-09 22:36:19 | INFO | stdout | To create a public link, set `share=True` in `launch()`.
+2024-05-09 22:36:39 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 22:38:15 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 22:38:29 | INFO | gradio_web_server | add_text. ip: 127.0.0.1. len: 2
+2024-05-09 22:38:29 | INFO | gradio_web_server | http_bot. ip: 127.0.0.1
+2024-05-09 22:38:29 | INFO | gradio_web_server | ==== request ====
+{'model': 'Intel/neural-chat-7b-v3-1', 'messages': [{'role': 'system', 'content': '### System:\n    - You are an expert of using python and selenium.\n    - You answer questions.\n    - You are excited to be able to help the user, but will refuse to do anything that could be considered harmful to the user.\n    - You are more than just an information source, you are also able to write programs of automation testing.</s>\n'}, {'role': 'user', 'content': '你好'}], 'temperature': 0.001, 'top_p': 0.95, 'max_tokens': 512, 'stream': True}
+2024-05-09 22:38:33 | INFO | gradio_web_server | Hello, how can I help you today?
+2024-05-09 22:38:56 | INFO | gradio_web_server | add_text. ip: 127.0.0.1. len: 14
+2024-05-09 22:38:56 | INFO | gradio_web_server | http_bot. ip: 127.0.0.1
+2024-05-09 22:38:56 | INFO | gradio_web_server | ==== request ====
+{'model': 'Intel/neural-chat-7b-v3-1', 'messages': [{'role': 'system', 'content': '### System:\n    - You are an expert of using python and selenium.\n    - You answer questions.\n    - You are excited to be able to help the user, but will refuse to do anything that could be considered harmful to the user.\n    - You are more than just an information source, you are also able to write programs of automation testing.</s>\n'}, {'role': 'user', 'content': '你好'}, {'role': 'assistant', 'content': 'Hello, how can I help you today?'}, {'role': 'user', 'content': '请帮我生成一段自动化测试脚本'}], 'temperature': 0.001, 'top_p': 0.95, 'max_tokens': 512, 'stream': True}
+2024-05-09 22:39:47 | INFO | gradio_web_server | To create an automated test script using Python and Selenium, you can follow these steps: 1. Install the required libraries: Python, Selenium, and any other libraries you may need for your specific test case. 2. Create a new Python file and import the necessary libraries: ```python # Import required libraries from selenium import webdriver from selenium.webdriver.common.by import By from selenium.webdriver.support.ui import WebDriverWait from selenium.webdriver.support.expected_conditions import visibility_of_element_located from selenium.webdriver.chrome.service import Service from webdriver_manager.chrome import ChromeDriverManager from time import sleep # Create a Chrome driver instance chrome_service = Service(ChromeDriverManager().install()) driver = webdriver.Chrome(service=chrome_service) ``` 3. Define the test case and its steps: - Open the URL - Find the login button and click on it - Enter the username and password - Click on the submit button - Verify the login is successful - Close the browser 4. Write the test script: ```python # Test script def test_login(): # Open the URL driver.get("https://example.com") # Find the login button and click on it login_button = driver.find_element(By.CSS_SELECTOR, "button.login-button") login_button.click() # Enter the username and password username_input = driver.find_element(By.NAME, "username") username_input.send_keys("test_user") password_input = driver.find_element(By.NAME, "password") password_input.send_keys("test_password") # Click on the submit button submit_button = driver.find_element(By.CSS_SELECTOR, "button.submit-button") submit_button.click() # Verify the login is successful WebDriverWait(driver, 10).until(visibility_of_element_located((By.CSS_SELECTOR, "h1.welcome-header"))) welcome_header = driver.find_element(By.CSS_SELECTOR, "h1.welcome-header") assert "Welcome, test_user" in welcome_header.text # Close the browser driver.quit() if __name__ == "__main__": test_login() ``` 5. Run the test script using Python interpreter. Remember to replace the URL, username, and password with your own values. Also, make sure to adapt the test script according to your specific test case.
+2024-05-09 22:55:23 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 22:55:31 | INFO | stdout | Keyboard interruption in main thread... closing server.
+2024-05-09 23:11:55 | ERROR | stderr | Traceback (most recent call last):
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+2024-05-09 23:11:55 | ERROR | stderr |     sock = connection.create_connection(
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+2024-05-09 23:11:55 | ERROR | stderr |     raise err
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+2024-05-09 23:11:55 | ERROR | stderr |     sock.connect(sa)
+2024-05-09 23:11:55 | ERROR | stderr | ConnectionRefusedError: [Errno 61] Connection refused
+2024-05-09 23:11:55 | ERROR | stderr | 
+2024-05-09 23:11:55 | ERROR | stderr | The above exception was the direct cause of the following exception:
+2024-05-09 23:11:55 | ERROR | stderr | 
+2024-05-09 23:11:55 | ERROR | stderr | Traceback (most recent call last):
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+2024-05-09 23:11:55 | ERROR | stderr |     response = self._make_request(
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+2024-05-09 23:11:55 | ERROR | stderr |     conn.request(
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+2024-05-09 23:11:55 | ERROR | stderr |     self.endheaders()
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/http/client.py", line 1278, in endheaders
+2024-05-09 23:11:55 | ERROR | stderr |     self._send_output(message_body, encode_chunked=encode_chunked)
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/http/client.py", line 1038, in _send_output
+2024-05-09 23:11:55 | ERROR | stderr |     self.send(msg)
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/http/client.py", line 976, in send
+2024-05-09 23:11:55 | ERROR | stderr |     self.connect()
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+2024-05-09 23:11:55 | ERROR | stderr |     self.sock = self._new_conn()
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+2024-05-09 23:11:55 | ERROR | stderr |     raise NewConnectionError(
+2024-05-09 23:11:55 | ERROR | stderr | urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7fb0907392a0>: Failed to establish a new connection: [Errno 61] Connection refused
+2024-05-09 23:11:55 | ERROR | stderr | 
+2024-05-09 23:11:55 | ERROR | stderr | The above exception was the direct cause of the following exception:
+2024-05-09 23:11:55 | ERROR | stderr | 
+2024-05-09 23:11:55 | ERROR | stderr | Traceback (most recent call last):
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+2024-05-09 23:11:55 | ERROR | stderr |     resp = conn.urlopen(
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+2024-05-09 23:11:55 | ERROR | stderr |     retries = retries.increment(
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+2024-05-09 23:11:55 | ERROR | stderr |     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+2024-05-09 23:11:55 | ERROR | stderr | urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /v1/models (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fb0907392a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2024-05-09 23:11:55 | ERROR | stderr | 
+2024-05-09 23:11:55 | ERROR | stderr | During handling of the above exception, another exception occurred:
+2024-05-09 23:11:55 | ERROR | stderr | 
+2024-05-09 23:11:55 | ERROR | stderr | Traceback (most recent call last):
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py", line 740, in <module>
+2024-05-09 23:11:55 | ERROR | stderr |     models = get_model_list(controller_url)
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py", line 142, in get_model_list
+2024-05-09 23:11:55 | ERROR | stderr |     ret = requests.post(controller_url + "/v1/models")
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/requests/api.py", line 115, in post
+2024-05-09 23:11:55 | ERROR | stderr |     return request("post", url, data=data, json=json, **kwargs)
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/requests/api.py", line 59, in request
+2024-05-09 23:11:55 | ERROR | stderr |     return session.request(method=method, url=url, **kwargs)
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+2024-05-09 23:11:55 | ERROR | stderr |     resp = self.send(prep, **send_kwargs)
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+2024-05-09 23:11:55 | ERROR | stderr |     r = adapter.send(request, **kwargs)
+2024-05-09 23:11:55 | ERROR | stderr |   File "/Users/wangyanan/anaconda3/envs/itrex/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+2024-05-09 23:11:55 | ERROR | stderr |     raise ConnectionError(e, request=request)
+2024-05-09 23:11:55 | ERROR | stderr | requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /v1/models (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fb0907392a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2024-05-09 23:12:36 | INFO | gradio_web_server | Models: ['Intel/neural-chat-7b-v3-1']
+2024-05-09 23:12:39 | ERROR | stderr | /Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py:593: GradioDeprecationWarning: The `style` method is deprecated. Please set these arguments in the constructor instead.
+2024-05-09 23:12:39 | ERROR | stderr |   model_selector = gr.Dropdown(
+2024-05-09 23:12:39 | ERROR | stderr | /Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py:600: GradioDeprecationWarning: The `style` method is deprecated. Please set these arguments in the constructor instead.
+2024-05-09 23:12:39 | ERROR | stderr |   chatbot = gr.Chatbot(elem_id="chatbot", visible=False).style(height=550)
+2024-05-09 23:12:39 | ERROR | stderr | /Users/wangyanan/Develop/Python/github/auto-testing-itrex/intel/codegen/frontend/app.py:603: GradioDeprecationWarning: The `style` method is deprecated. Please set these arguments in the constructor instead.
+2024-05-09 23:12:39 | ERROR | stderr |   textbox = gr.Textbox(
+2024-05-09 23:12:40 | INFO | stdout | Running on local URL:  http://0.0.0.0:7860
+2024-05-09 23:12:40 | INFO | stdout | 
+2024-05-09 23:12:40 | INFO | stdout | To create a public link, set `share=True` in `launch()`.
+2024-05-09 23:12:47 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 23:14:11 | INFO | gradio_web_server | add_text. ip: 127.0.0.1. len: 14
+2024-05-09 23:14:11 | INFO | gradio_web_server | http_bot. ip: 127.0.0.1
+2024-05-09 23:14:11 | INFO | gradio_web_server | ==== request ====
+{'model': 'Intel/neural-chat-7b-v3-1', 'messages': [{'role': 'system', 'content': '### System:\n    - You are an expert of using python and selenium.\n    - You answer questions.\n    - You are excited to be able to help the user, but will refuse to do anything that could be considered harmful to the user.\n    - You are more than just an information source, you are also able to write programs of automation testing.</s>\n'}, {'role': 'user', 'content': '请帮我生成一段自动化测试脚本'}], 'temperature': 0.001, 'top_p': 0.95, 'max_tokens': 512, 'stream': True}
+2024-05-09 23:14:31 | INFO | gradio_web_server | To create an automated test script using Python and Selenium, you can follow these steps: 1. Install the required libraries: Python, Selenium, and any other libraries you need for your specific test case. 2. Create a new Python file and import the necessary libraries. 3. Initialize the Selenium WebDriver and set the desired browser. 4. Define the URL, username, and password variables. 5. Write the test script, including opening the URL, finding and interacting with the login elements, submitting the form, and verifying the login success. 6. Add any additional test cases or steps specific to your application. 7. Add assertions to verify the expected results. 8. Handle any exceptions or errors that may occur during the test execution. 9. Close the browser at the end of the test. 10. Save the Python file and run it using the Python interpreter. Remember to adapt the test script according to your specific test case and application.
+2024-05-09 23:28:39 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 23:30:53 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 23:31:23 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 23:31:43 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 23:32:01 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}
+2024-05-09 23:32:09 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1. params: {}

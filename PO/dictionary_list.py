@@ -1,0 +1,1 @@
+class PageWrapper: def init(self, driver): self.driver = driver self.gray_bg = self.driver.find_element_by_id("gray-bg") self.page_wrapper = self.driver.find_element_by_id("page-wrapper") self.body = self.driver.find_element_by_id("body") def get_gray_bg(self): return self.gray_bg def get_page_wrapper(self): return self.page_wrapper def get_body(self): return self.body

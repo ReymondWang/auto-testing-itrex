@@ -139,6 +139,16 @@ def save_dom_file(dom_source: str, file_name: str, path: str="../dom") -> None:
         file.write(dom_source)
 
 
+def save_python_file(py_src: str, file_name: str, path: str="../PO") -> None:
+    cur_path = os.path.abspath(__file__)
+    cur_path = cur_path.replace("utils.py", "")
+    path = os.path.join(cur_path, path)
+    file_path = os.path.join(path, file_name)
+
+    with open(file_path, 'w') as file:
+        file.write(py_src)
+
+
 def login_by_user(driver: WebDriver, user_login_id: str, password: str, title: str=None):
     if title and title != driver.title:
         raise Exception("URL:" + driver.current_url + "不是登录页面")
