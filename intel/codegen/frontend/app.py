@@ -331,6 +331,7 @@ def http_bot(state, model_selector, temperature, max_new_tokens, topk, request: 
         for i, data in enumerate(stream_iter):
             if data["error_code"] == 0:
                 output = data["text"].strip()
+                    
                 state.messages[-1][-1] = output + "▌"
                 yield (state, state.to_gradio_chatbot()) + (disable_btn,) * 5
             else:

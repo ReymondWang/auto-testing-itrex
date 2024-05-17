@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
-from utils import find_all_a_elements, login_by_user, prun_html, save_dom_file, save_python_file, get_crawler_config, is_valid_file_name_part
+from utils import find_all_a_elements, login_by_user, prun_html, save_dom_file, save_python_file, get_crawler_config, is_valid_file_name_part, format_py_code
 
 import datetime
 import furl
@@ -199,12 +199,13 @@ class HsCrawler(object):
     self.wait.until(EC.element_to_be_clickable(refresh_ele))
 
     response_ele = self.driver.find_element(By.XPATH, response_ele_loc)
-    save_python_file(response_ele.text, file_name=file_name)
+    formatted_code = format_py_code(response_ele.text)
+    save_python_file(formatted_code, file_name=file_name)
 
 
   def code_prompt(self, msg):
     # prompt = "Please generate a PO object for automated testing based on the following HTML, and return only Python code in Python code format. "
-    prompt = "请根据以下html生成自动化测试的PO对象，并且以Python代码的格式返回。在返回内容中不要添加文字解释，只返回代码即可。 "
+    prompt = "请根据以下html生成自动化测试的PO对象，对象中要包括元素的定位以及基本操作，并且以Python代码的格式返回。在返回内容中不要添加文字解释，只返回代码即可。 "
     return prompt + msg
 
 

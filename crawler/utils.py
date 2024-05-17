@@ -9,6 +9,7 @@ import yaml
 import lxml.html
 import os
 import re
+import autopep8
 
 def get_crawler_config(file_path: str):
     with open(file_path, 'r') as file:
@@ -166,3 +167,16 @@ def is_valid_file_name_part(s):
     return not bool(re.search(r'\d', s)) \
         and "null" != s \
         and "system" != s
+        
+def format_py_code(raw_code: str):
+    """
+    Python代码的自动格式化
+    """
+    raw_code = raw_code.replace(" from ", "\nfrom ")
+    raw_code = raw_code.replace(" class ", "\nclass ")
+    raw_code = raw_code.replace(" def", "\n\tdef")
+    raw_code = raw_code.replace(") ", ")\n")
+    raw_code = raw_code.replace("): ", "):\n\t\t")
+    
+    formatted_code = autopep8.fix_code(raw_code, options={'aggressive': 1})
+    return formatted_code

@@ -41,6 +41,18 @@
 **实现思路：** 利用大模型的文本理解和代码生成能力，将WEB页面的框架元素和设计过的Prompt模版结合起来作为输入，并从返回结果中解析出适合的Python代码。
 
 **系统的整体结构如下：**
+
 <img width="415" alt="image" src="https://github.com/ReymondWang/auto-testing-itrex/assets/13266952/462962ba-488f-4fb0-8578-e134ee9fb354">
 
 
+**系统启动命令：**
+```python
+conda activate itrex
+
+python crawler/hs_crawler.py 
+```
+
+**系统统一的配置文件：**
+```python
+./config/crawler.yml
+```
